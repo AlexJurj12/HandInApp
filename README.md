@@ -33,6 +33,6 @@ By creating one, you can do the following things and more:
   - Could have:
     - As a user I want to be able to have a link which opens the platform that streams the item, in order to access it faster.
     - As a logged in user I want to be able to rate an item, in order to express my likeness of it
-    - As a logged in user I want to be able to delete my acount, in order to remove my presence from the app.
+    - As a logged in user I want to be able to delete my account, in order to remove my presence from the app.
   - Won't have:
     - As a user I want to be able to set the theme to dark mode, in order to lessen the strain on my eyes.
