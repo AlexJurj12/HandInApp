@@ -20,7 +20,15 @@ By creating one, you can do the following things and more:
     - As a user I want to be able to search for an item by name, in order to find it easier.
     - As a user I want to be able to filter items by type and genre, in order to refine my search.
     - As a user I want for each item to have a descriptive page, in order to get more information about them.
-  - Should have:
     - As a user I want to be able to create an account, in order to access the other functionalities.
+    - As a logged in user I want to be able to set the numbers of episodes I have watched of an item, so I know where to continue watching from.
+  - Should have:
+    - As a logged in user I want to be albe to edit my profile information. in order to keep my details updated.
+    - As a logged in user I want to be able to see other users profiles in order to see what they are watching.
+    - As a logged in user I want to be able to send friend requests to other users, in order to 
+    - As a logged in user I want to be able to favourite an item, in order to have a list comprised only of my favourite shows.
+    - As a logged in user I want to be able to set the status of a show, such as "Completed", in order to better manage my shows.
   - Could have:
+    - As a user I want to be able to have a link which opens the platform that streams the item, in order to access it faster.
+    - As a logged in user I want to be able to rate an item, in order to express my likeness of it
   - Won't have:
