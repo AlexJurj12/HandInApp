@@ -29,6 +29,7 @@ By creating one, you can do the following things and more:
     - As a logged in user I want to be able to unfriend a user, in order to delete them from my friend list.
     - As a logged in user I want to be able to favourite an item, in order to have a list comprised only of my favourite shows.
     - As a logged in user I want to be able to unfavourite an item, in order to remove them from the list.
+    - As a logged in user I want to be able to set my lists to public or private, in order to let other users to see my lists or not.
     - As a logged in user I want to be able to set the status of a show, such as "Completed", in order to better manage my shows.
   - Could have:
     - As a user I want to be able to have a link which opens the platform that streams the item, in order to access it faster.
