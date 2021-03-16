@@ -17,18 +17,22 @@ By creating one, you can do the following things and more:
  *The logged in user can do everything the simple user can*
  
   - Must have:
-    - As a user I want to be able to search for an item by name, in order to find it easier.
-    - As a user I want to be able to filter items by type and genre, in order to refine my search.
-    - As a user I want for each item to have a descriptive page, in order to get more information about them.
-    - As a user I want to be able to create an account, in order to access the other functionalities.
-    - As a logged in user I want to be able to set the numbers of episodes I have watched of an item, so I know where to continue watching from.
+    1. As a user I want to be able to search for an item by name, in order to find it easier.
+    2. As a user I want to be able to filter items by type and genre, in order to refine my search.
+    3. As a user I want for each item to have a descriptive page, in order to get more information about them.
+    4. As a user I want to be able to create an account, in order to access the other functionalities.
+    5. As a logged in user I want to be able to set the numbers of episodes I have watched of an item, so I know where to continue watching from.
   - Should have:
-    - As a logged in user I want to be albe to edit my profile information. in order to keep my details updated.
-    - As a logged in user I want to be able to see other users profiles in order to see what they are watching.
-    - As a logged in user I want to be able to send friend requests to other users, in order to 
-    - As a logged in user I want to be able to favourite an item, in order to have a list comprised only of my favourite shows.
-    - As a logged in user I want to be able to set the status of a show, such as "Completed", in order to better manage my shows.
+    6. As a logged in user I want to be albe to edit my profile information. in order to keep my details updated.
+    7. As a logged in user I want to be able to see other users profiles in order to see what they are watching.
+    8. As a logged in user I want to be able to send friend requests to other users, in order to more easily access their profile.
+    9. As a logged in user I want to be able to unfriend a user, in order to delete them from my friend list.
+    10. As a logged in user I want to be able to favourite an item, in order to have a list comprised only of my favourite shows.
+    11. As a logged in user I want to be able to unfavourite an item, in order to remove them from the list.
+    12. As a logged in user I want to be able to set the status of a show, such as "Completed", in order to better manage my shows.
   - Could have:
-    - As a user I want to be able to have a link which opens the platform that streams the item, in order to access it faster.
-    - As a logged in user I want to be able to rate an item, in order to express my likeness of it
+    13. As a user I want to be able to have a link which opens the platform that streams the item, in order to access it faster.
+    14. As a logged in user I want to be able to rate an item, in order to express my likeness of it
+    15. As a logged in user I want to be able to delete my acount, in order to remove my presence from the app.
   - Won't have:
+    16. As a user I want to be able to set the theme to dark mode, in order to lessen the strain on my eyes.
