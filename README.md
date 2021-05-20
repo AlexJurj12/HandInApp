@@ -1,4 +1,4 @@
-# HandInApp
+# HandInApp - MovieTracker
 Application for AND
 
 LINK TO YOUTUBE VIDEO: https://youtu.be/U05tuO1IWog
