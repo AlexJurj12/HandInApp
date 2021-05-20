@@ -1,5 +1,6 @@
 package com.example.handinapp;
 
+import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.crypto.AEADBadTagException;
 
@@ -21,16 +26,24 @@ public class MovieRepository {
 
     private static MovieRepository instance;
     private MutableLiveData<ArrayList<Movie>> movies;
+    private MutableLiveData<MovieResponse> movieResponse;
+    private LiveData<MovieDBItem> savedMovie;
+    private final ExecutorService executorService;
+    private final MovieDAO movieDAO;
 
-    private MovieRepository()
+    private MovieRepository(Application app)
     {
         movieAPI = ServiceGenerator.getMovieAPI();
         movies = new MutableLiveData<>();
+        movieResponse = new MutableLiveData<>();
+        executorService = Executors.newFixedThreadPool(2);
+        MovieDatabase database = MovieDatabase.getInstance(app);
+        movieDAO = database.movieDAO();
     }
 
-    public static synchronized MovieRepository getInstance() {
+    public static synchronized MovieRepository getInstance(Application app) {
         if (instance == null) {
-            instance = new MovieRepository();
+            instance = new MovieRepository(app);
         }
         return instance;
     }
@@ -38,6 +51,10 @@ public class MovieRepository {
     public LiveData<ArrayList<Movie>> getMoviesList()
     {
         return movies;
+    }
+
+    public MutableLiveData<MovieResponse> getMovieResponse() {
+        return movieResponse;
     }
 
     public void searchPopularMovies()
@@ -49,7 +66,6 @@ public class MovieRepository {
             public void onResponse(Call<MovieResponseList> call, Response<MovieResponseList> response) {
                 if (response.isSuccessful()) {
                     movies.setValue(response.body().getMovies());
-                    System.out.println(movies.getValue().get(0).toStringCustom());
                 }
             }
             @EverythingIsNonNull
@@ -67,9 +83,8 @@ public class MovieRepository {
             @EverythingIsNonNull
             @Override
             public void onResponse(Call<MovieResponseList> call, Response<MovieResponseList> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body().getMovies() != null) {
                     movies.setValue(response.body().getMovies());
-                    System.out.println(movies.getValue().get(0).toStringCustom());
                 }
             }
             @EverythingIsNonNull
@@ -80,40 +95,53 @@ public class MovieRepository {
         });
     }
 
-//    public Movie searchMovieDetails(int id)
-//    {
-//        Call<Movie> call = movieAPI.getMovieDetail(id);
-//        call.enqueue(new Callback<Movie>() {
-//            @EverythingIsNonNull
-//            @Override
-//            public void onResponse(Call<Movie> call, Response<Movie> response) {
-//                if (response.isSuccessful()) {
-//                    mv = response.body();
-//                }
-//            }
-//            @EverythingIsNonNull
-//            @Override
-//            public void onFailure(Call<Movie> call, Throwable t) {
-//                Log.i("Retrofit", "Something went wrong :(");
-//            }
-//        });
-//    }
+    public void searchMovieById(int id) {
+        Call<MovieResponse> call = movieAPI.searchMovieById(id);
+        call.enqueue(new Callback<MovieResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    movieResponse.setValue(response.body());
+                }
+                else
+                {
+                    System.out.println("body is null");
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                Log.i("Retrofit", t.getMessage());
+            }
+        });
+    }
 
-//    public void searchForMovie(String movieName) {
-//        Call<MovieResponse> call = movieAPI.searchMovie(pokemonName);
-//        call.enqueue(new Callback<MovieResponse>() {
-//            @EverythingIsNonNull
-//            @Override
-//            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
-//                if (response.isSuccessful()) {
-//                    searchedPokemon.setValue(response.body().getPokemon());
-//                }
-//            }
-//            @EverythingIsNonNull
-//            @Override
-//            public void onFailure(Call<PokemonResponse> call, Throwable t) {
-//                Log.i("Retrofit", "Something went wrong :(");
-//            }
-//        });
+    public void saveMovieLocally(MovieDBItem movieDBItem) {
+        executorService.execute(()->movieDAO.saveMovie(movieDBItem));
+    }
+
+    public void deleteMovieLocally(MovieDBItem movieDBItem) {
+        executorService.execute(()->movieDAO.saveMovie(movieDBItem));
+    }
+
+    public LiveData<MovieDBItem> getMovieLocally(int id)
+    {
+        executorService.execute(()->movieDAO.getMovie(id));
+        return null;
+    }
+
+//    public LiveData<List<Movie>> getWatchedList() {
+//        List<MovieDBItem> list = watchedList.getValue();
+//        ArrayList<MovieDBItem> arrayList = new ArrayList<>(list);
+//        ArrayList<Movie> temp = new ArrayList<>();
+//        for (int i = 0; i< list.size(); i++) {
+//            Movie m = new Movie()
+//        }
+//        return watchedList;
+//    }
+//
+//    public LiveData<List<Movie>> getWatchLaterList() {
+//        return watchLaterList;
 //    }
 }

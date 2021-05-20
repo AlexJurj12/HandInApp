@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">MovieTracker</string>
+    <string name="nav_close">Close</string>
+    <string name="nav_open">Open</string>
+    <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="release_date">Release date: </string>
+    <string name="genres">Genres: </string>
+    <string name="duration">Duration: </string>
+    <string name="overview">Overview: </string>
+    <string name="movie_poster">Movie poster</string>
+    <string name="movie_watched">Watched</string>
+    <string name="movie_watchLater">Watch later</string>
+
+    <string-array name="movieWatchChoice">
+        <item>None</item>
+        <item>Watched</item>
+        <item>Watch later</item>
+    </string-array>
 </resources>

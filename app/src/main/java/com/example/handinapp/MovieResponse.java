@@ -1,5 +1,8 @@
 package com.example.handinapp;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieResponse {
@@ -7,14 +10,19 @@ public class MovieResponse {
     private String title;
     private String overview;
     private String poster_path;
-
+    private String dummyPoster = "https://image.tmdb.org/t/p/w780";
     private String release_date;
     private int runtime;
-    private List<Integer> genre_ids;
+    private List<Genres> genres = new ArrayList<>();
+
+    public MovieResponse()
+    {
+
+    }
 
     public Movie getMovie()
     {
-        return new Movie(title, release_date, poster_path);
+        return new Movie(id,title,poster_path);
     }
 
     public int getId() {
@@ -46,7 +54,14 @@ public class MovieResponse {
     }
 
     public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+        this.poster_path = dummyPoster + poster_path;
+    }
+
+    public void setPosterWithDummy()
+    {
+        dummyPoster += poster_path;
+        poster_path = dummyPoster;
+        dummyPoster = "https://image.tmdb.org/t/p/w780";
     }
 
     public String getRelease_date() {
@@ -65,11 +80,54 @@ public class MovieResponse {
         this.runtime = runtime;
     }
 
-    public List<Integer> getGenre_ids() {
-        return genre_ids;
+    public List<Genres> getGenres() {
+        return genres;
     }
 
-    public void setGenre_ids(List<Integer> genre_ids) {
-        this.genre_ids = genre_ids;
+    public void setGenres(List<Genres> genres) {
+        this.genres = genres;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieResponse{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", overview='" + overview + '\'' +
+                ", poster_path='" + poster_path + '\'' +
+                ", dummyPoster='" + dummyPoster + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", runtime=" + runtime +
+                ", genres=" + genres +
+                '}';
+    }
+
+    public class Genres {
+        int id;
+        String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Genres{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
 }

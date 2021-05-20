@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainMovieFragment">
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.handinapp.MovieDetailFragment"
+        android:label="Movie details"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_mainMovieFragment"
+            app:destination="@id/mainMovieFragment" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainMovieFragment"
+        android:name="com.example.handinapp.MainMovieFragment"
+        android:label="Movies"
+        tools:layout="@layout/fragment_main_movie">
+        <action
+            android:id="@+id/action_mainMovieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.handinapp.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_mainMovieFragment"
+            app:destination="@id/mainMovieFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+</navigation>

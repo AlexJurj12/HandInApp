@@ -1,90 +1,89 @@
 package com.example.handinapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.OnListItemClickListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    RecyclerView itemList;
-    MovieAdapter movieAdapter;
-    MovieViewModel movieViewModel;
+    DrawerLayout drawerLayout;
     Toolbar toolbar;
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //initialize recyclerview
-        itemList = findViewById(R.id.rv);
-        itemList.hasFixedSize();
-        itemList.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<Movie> movies = new ArrayList<>();
+        //navigation drawer
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        //get popular movies and put them in the recyclerview
-        movieViewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        movieAdapter = new MovieAdapter(movies, this);
-        itemList.setAdapter(movieAdapter);
-        movieViewModel.getMoviesList().observe(this, moviesList -> {
-            movieAdapter.updateData(moviesList);
-        });
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-        movieViewModel.searchPopularMovies();
-        //movieViewModel.searchMovieByTitle("avenger");
+        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(drawerLayout).build();
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Intent intent = new Intent(this, GoogleSignInActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) item.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.drawerProfile:
+                Log.i("navigation","profile clicked");
+                drawerLayout.closeDrawer(GravityCompat.START);
+                navController.navigate(R.id.profileFragment);
+
+                return true;
+            default:
                 return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        return true;
+        }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId())
-//        {
-//            case R.id.action_search:
-//                System.out.println("merge searchu");
-//                return true;
-//            default: return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-    @Override
-    public void onListItemClick(int clickedItemIndex) {
-        int movieNumber = clickedItemIndex + 1;
-        Toast.makeText(this, "Movie Number: " + movieNumber, Toast.LENGTH_SHORT).show();
-//        Context context = getApplicationContext();
-//        Class destination = SecondActivity.class;
-//        Intent intent = new Intent(MainActivity.this, PlantDetails.class);
-//        startActivity(intent);
-
-    }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "214832743893",
+    "project_id": "and-movietrackerapp",
+    "storage_bucket": "and-movietrackerapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214832743893:android:6b9ae1081e68acd648695c",
+        "android_client_info": {
+          "package_name": "com.example.handinapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214832743893-1kbc45jgsspg7cqq1tav70lle7sqio91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9Mjm3p8zz0D68JTlO1r4mEcfuEcLs10Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214832743893-1kbc45jgsspg7cqq1tav70lle7sqio91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

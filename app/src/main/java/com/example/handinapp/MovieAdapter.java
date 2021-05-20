@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         viewHolder.name.setText(movieArrayList.get(position).getTitle());
         Glide.with(viewHolder.itemView).load(movieArrayList.get(position).getPoster())
                 .placeholder(R.drawable.unnamed).error(R.drawable.unnamed).into(viewHolder.icon);
+        viewHolder.itemContainer.setOnClickListener(v -> onListItemClickListener.onListItemClick(movieArrayList.get(position).getId()));
     }
 
     public int getItemCount() {
@@ -47,21 +49,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         ImageView icon;
+        LinearLayout itemContainer;
 
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.tv_name);
             icon = itemView.findViewById(R.id.iv_icon);
-            itemView.setOnClickListener(this);
+            itemContainer = itemView.findViewById(R.id.itemContainer);
         }
 
-        @Override
-        public void onClick(View v) {
-            onListItemClickListener.onListItemClick(getAdapterPosition());
-        }
     }
 
     public interface OnListItemClickListener {

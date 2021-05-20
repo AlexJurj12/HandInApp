@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.handinapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HandInApp">
-        <activity android:name=".MainActivity">
-
-            <meta-data android:name="android.app.searchable"
+        <activity android:name=".GoogleSignInActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.HandInApp.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
 
             <intent-filter>
@@ -23,4 +26,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
