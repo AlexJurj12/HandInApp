@@ -30,6 +30,6 @@ By creating an account, you can do the following things and more:
     - As a user I want to be able to set the theme to dark mode, in order to lessen the strain on my eyes. NOT COMPLETED
 
 References:
--https://www.youtube.com/watch?v=DI0NIk-7cz8&t=1s Navigation Component
--https://www.youtube.com/watch?v=fGcMLu1GJEc Navigation Drawer
--other official documentation
+ - https://www.youtube.com/watch?v=DI0NIk-7cz8&t=1s Navigation Component
+ - https://www.youtube.com/watch?v=fGcMLu1GJEc Navigation Drawer
+ - other official documentation
