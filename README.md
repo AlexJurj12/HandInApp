@@ -2,7 +2,7 @@
 Application for AND
 
 The application will be a movie tracker. There will be a library of movies you can scroll through and open to get further details about the item.
-By creating one, you can do the following things and more:
+By creating an account, you can do the following things and more:
  - You can set the movie as "Completed" or "Plan to watch".
  - Put an item in a "Favourite" list.
  
